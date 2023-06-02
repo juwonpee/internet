@@ -1,1 +1,33 @@
-hello world
+<!Doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel = "stylesheet" href="main.css">
+<script>
+    var xhr = new XMLHttpRequest();
+    var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst'; ///URL/
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'33bU4NRUJ5pns3K%2FYK%2BU8LxMesOCiRs03brpKSY1mRMvXtN8NhftRxgU6bo30j2ydwOlIOtXQxU%2Br0aiSjlOKA%3D%3D'; ///Service Key/
+    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); //
+    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); //
+    queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON'); //
+    queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent('20230602'); //
+    queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent('0600'); //
+    queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('55'); //
+    queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127'); /**/
+    xhr.open('GET', url + queryParams);
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+            json = JSON.parse(xml.responseText);
+            alert(json)
+        }
+    };
+    
+    xhr.send('');</script>
+<style>td {border:1px solid black;}</style>
+</head>
+<body>
+<h1>로그인</h1>
+<form>아이디:<input type="text" autofocus/><br />패스워드:<input type="password" required/><br /><button>login</button></form>
+</body>
+</html>
