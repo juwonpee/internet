@@ -102,6 +102,6 @@ fetch(dust_url + '?' + dustQueryParams)
     console.log(obj);
     return obj;
 })
-// .catch(function(error) {
-//     console.log(error);
-// });;
+.catch(function(error) {
+    console.log(error);
+});;
