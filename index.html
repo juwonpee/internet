@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <link rel = "stylesheet" href="main.css">
-<script src="main.js"></script>
+
 <style>td {border:1px solid black;}</style>
 </head>
 <body>
@@ -11,21 +11,24 @@
     <h2 id="message0">
         현재 기온: 
         <h4 id="tempNum"></h4>
-        ...이며, 미세먼지는 ...입니다.
+        ...이며, 미세먼지는 ...<h4 id="dustNum0"></h4>입니다.
     </h2>
+    <div id="wind">
+        풍속: 
+        <h2 id="windNum"></h2>
+    </div>
     <form>개의 크기:<input type="radio" name='group1' value="dog1" autofocus/><label>대형견!</label><input type="radio" name='group1'value="dog2" autofocus/><label>중형견!</label><input type="radio" name='group1'value="dog3" autofocus/><label>소형견!</label><br /></form>
     <button id="button1">알아보기</button>
     <div id="message1">산책지수 : ...</div>
     <div id="message2">팁:</div>
 
-    <div id="wind">
-        풍속: 
-        <h2 id="windNum"></h2>
-    </div>
-    <div id="dust">
-        미세먼지: 
-        <h2 id="dustNum"></h2>
-    </div>
+    
+
+    <script src="main.js"></script>
+    <script>
+        const button = document.getElementById("button1");
+        button.addEventListener('click', hello);
+    </script>
 </body>
 </html>
 
