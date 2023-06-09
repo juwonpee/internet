@@ -4,12 +4,20 @@
 <meta charset="utf-8">
 <link rel = "stylesheet" href="main.css">
 <script src="main.js"></script>
+<style>td {border:1px solid black;}</style>
 </head>
 <body>
-    <div id="temp">
-        기온
-        <h2 id="tempNum"></h2>
-    </div>
+    <h1>강아지 산책 지수</h1>
+    <h2 id="message0">
+        현재 기온: 
+        <h4 id="tempNum"></h4>
+        ...이며, 미세먼지는 ...입니다.
+    </h2>
+    <form>개의 크기:<input type="radio" name='group1' value="dog1" autofocus/><label>대형견!</label><input type="radio" name='group1'value="dog2" autofocus/><label>중형견!</label><input type="radio" name='group1'value="dog3" autofocus/><label>소형견!</label><br /></form>
+    <button id="button1">알아보기</button>
+    <div id="message1">산책지수 : ...</div>
+    <div id="message2">팁:</div>
+
     <div id="wind">
         풍속: 
         <h2 id="windNum"></h2>
