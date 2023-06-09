@@ -3,31 +3,51 @@
 <head>
 <meta charset="utf-8">
 <link rel = "stylesheet" href="main.css">
-<script>
-    var xhr = new XMLHttpRequest();
-    var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst'; ///URL/
-    var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'33bU4NRUJ5pns3K%2FYK%2BU8LxMesOCiRs03brpKSY1mRMvXtN8NhftRxgU6bo30j2ydwOlIOtXQxU%2Br0aiSjlOKA%3D%3D'; ///Service Key/
-    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); //
-    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); //
-    queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON'); //
-    queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent('20230602'); //
-    queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent('0600'); //
-    queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('55'); //
-    queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127'); /**/
-    xhr.open('GET', url + queryParams);
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-            json = JSON.parse(xml.responseText);
-            alert(json)
-        }
-    };
+<script>var url = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst';
+    var apiKey = '33bU4NRUJ5pns3K/YK+U8LxMesOCiRs03brpKSY1mRMvXtN8NhftRxgU6bo30j2ydwOlIOtXQxU+r0aiSjlOKA==';
+    const date = new Date();
+    const baseDate = date.getFullYear().toString() + ("0" + (date.getMonth() + 1)).slice(-2) + ("0" + date.getDate()).slice(-2);
+    const baseTime = ("0" + (date.getHours()-1)).slice(-2) + "00";
+    console.log(baseDate)
+    console.log(baseTime)
+    var nx = '55';
+    var ny = '127';
     
-    xhr.send('');</script>
+    var queryParams = new URLSearchParams({
+      serviceKey: apiKey,
+      pageNo: '1',
+      numOfRows: '5',
+      dataType: 'JSON',
+      base_date: baseDate,
+      base_time: baseTime,
+      nx: nx,
+      ny: ny
+    });
+    fetch(url + '?' + queryParams)
+      .then(function(response) {
+        obj = response.json();
+        
+        return obj;
+      })
+      .then(function(data) {
+        console.log(data)
+        // If no error or wrong response
+        if (data['response']['header']['resultMsg'] == "NO_DATA") {
+            throw new Error("No Data");
+        }
+        document.getElementById("obj").innerText=data['response']['body']['items']['item'][0]['fcstValue'];
+        console.log(data); // Use the response data as needed
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    </script>
 <style>td {border:1px solid black;}</style>
 </head>
 <body>
 <h1>로그인</h1>
+<h2 id="obj"></h2>
 <form>아이디:<input type="text" autofocus/><br />패스워드:<input type="password" required/><br /><button>login</button></form>
 </body>
 </html>
+
