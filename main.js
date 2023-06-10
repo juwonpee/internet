@@ -4,7 +4,7 @@ var address_url = 'http://api.vworld.kr/req/address'
 const date = new Date();
 var baseDate = date.getFullYear().toString() + ("0" + (date.getMonth() + 1)).slice(-2) + ("0" + date.getDate()).slice(-2);
 const hour = date.getHours();
-// Set time in 3 hour increments
+// Set time in 3 hour increments for weather API
 var baseTime;
 for (let x = 2; x < 24; x+=3) {
     if (x >= hour) {
@@ -16,8 +16,6 @@ for (let x = 2; x < 24; x+=3) {
         baseTime = ("0" + 2).slice(-2) + "00";
     }
 }
-// baseTime = '0200'
-// baseDate = "20230610"
 console.log('Time: ' + baseTime)
 console.log("Date " + baseDate)
 
