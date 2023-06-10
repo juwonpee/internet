@@ -77,11 +77,12 @@ function dfs_xy_conv(v1, v2) {
     return rs;
 }
 
-function calculate(temp,wind,dust) {
-    document.getElementById("tempNum").innerText=temp;
-    document.getElementById("windNum").innerText=wind;
-    document.getElementById("dustNum0").innerText=dust;
-    console.log("asedfasdrfs " + dust)
+function calculate(temp,wind,dust, dust2, rs) {
+    document.getElementById("tempNum").innerText = "현재 기온: " + temp + "°C";
+    document.getElementById("windNum").innerText = "풍속: " + wind + "m/s";
+    document.getElementById("dustNum0").innerText = "미세먼지: " + 'pm2.5: ' + dust + ", pm10: " + dust2;
+    document.getElementById("location").innerText = "현 위치: " + rs.lat.toString() + ", " + rs.lng.toString();
+    
     var nodevalue;
     const genderNodeList = document.getElementsByName('group1');
     
@@ -96,15 +97,13 @@ function calculate(temp,wind,dust) {
     if(nodevalue="dog1"){if(temp>12){result="매우 좋음";}else if(temp>7){result="좋음";}else if(temp>-1){result="보통";}else if(temp>-4){result="나쁨";}else{result="매우 나쁨";}}
     else if(nodevalue="dog2"){if(temp>10){result="매우 좋음";}else if(temp>7){result="좋음";}else if(temp>-1){result="보통";}else if(temp>-9){result="나쁨";}else{result="매우 나쁨";}}
     else{if(temp>7){result="매우 좋음";}else if(temp>4){result="좋음";}else if(temp>-6){result="보통";}else if(temp>-9){result="나쁨";}else{result="매우 나쁨";}}
-    document.getElementById('message1').innerText
-            = '산책지수: '+result;
-            var tip='';
-            if(temp>25){tip = tip+'더운 여름날: 자외선이 강한 오후 11시에서 2시 사이에는 각막염을 유발할 수 있으므로 피해야 합니다. 그늘이어도 바닥의 온도를 손으로 만져보고 지나치게 고온이 아닌지 확인해야 합니다. 아무리 짧게 산책한다고 해도 물을 챙겨서 먹여주세요./n';}
-            if(temp<7){tip = tip+'추운 날: 나이가 어리거나 많은 강아지, 소형견, 치와와와 같은 소형견은 체온조절 능력이 떨어져 따뜻한 옷을 입혀줘야 합니다. 집 안에서 기온이 낮은 베란다와 같은 곳에서 온도적응을 하고 나가시고, 준비운동으로 관절을 충분히 풀어주어야 합니다./n';}
-            if(dust>18){tip = tip+'미세먼지가 많은 날: 미세먼지가 많은 날에는 산책활동을 삼가는 것이 좋지만, 산책을 하게 된다면 물을 많이 섭취하는 것이 도움이 됩니다. 산책 후에 목욕을 하거나 반려동물용 물티슈와 빗으로 먼지를 털어주는 것이 필요합니다./n';}
-            if(wind.match(/\d+/g)[0]>2){tip = tip+'바람이 센 날: 바람이 불어 자신의 털이 날리는 것이 싫을 수 있고, 귀로 바람이 들어가 불편해할 수 있습니다. 또 바람소리 등 평소와 다름으로 인해 불안해할 수 있기 때문에 가급적 짧은 시간만 산책을 시켜주세요../n';}
-            alert(tip);
-            document.getElementById('message2').innerText=tip;
+    document.getElementById('message1').innerText= '산책지수: '+result;
+    var tip='';
+    if(temp>25){tip = tip+'더운 여름날: 자외선이 강한 오후 11시에서 2시 사이에는 각막염을 유발할 수 있으므로 피해야 합니다. 그늘이어도 바닥의 온도를 손으로 만져보고 지나치게 고온이 아닌지 확인해야 합니다. 아무리 짧게 산책한다고 해도 물을 챙겨서 먹여주세요.\n';}
+    if(temp<7){tip = tip+'추운 날: 나이가 어리거나 많은 강아지, 소형견, 치와와와 같은 소형견은 체온조절 능력이 떨어져 따뜻한 옷을 입혀줘야 합니다. 집 안에서 기온이 낮은 베란다와 같은 곳에서 온도적응을 하고 나가시고, 준비운동으로 관절을 충분히 풀어주어야 합니다./n';}
+    if(dust>18){tip = tip+'미세먼지가 많은 날: 미세먼지가 많은 날에는 산책활동을 삼가는 것이 좋지만, 산책을 하게 된다면 물을 많이 섭취하는 것이 도움이 됩니다. 산책 후에 목욕을 하거나 반려동물용 물티슈와 빗으로 먼지를 털어주는 것이 필요합니다./n';}
+    if(wind.match(/\d+/g)[0]>2){tip = tip+'바람이 센 날: 바람이 불어 자신의 털이 날리는 것이 싫을 수 있고, 귀로 바람이 들어가 불편해할 수 있습니다. 또 바람소리 등 평소와 다름으로 인해 불안해할 수 있기 때문에 가급적 짧은 시간만 산책을 시켜주세요../n';}
+    document.getElementById('message2').innerText=tip;
 }
 
 function hello(){
@@ -202,7 +201,7 @@ function start() {
                             console.log("2.5: " + pm25 + ", 10: " + pm10);
                             finalData['2.5']= pm25;
                             finalData['10']= pm10;
-                            calculate(finalData['temp'],finalData['wind'],finalData['2.5']);
+                            calculate(finalData['temp'],finalData['wind'],finalData['2.5'], finalData['10'], rs);
                         })
                         .catch(function(error) {
                             // console.log(response)
