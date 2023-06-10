@@ -3,35 +3,32 @@
 <head>
 <meta charset="utf-8">
 <link rel = "stylesheet" href="main.css">
-<script>
-    var xhr = new XMLHttpRequest();
-    var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst'; ///URL/
-    var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'33bU4NRUJ5pns3K%2FYK%2BU8LxMesOCiRs03brpKSY1mRMvXtN8NhftRxgU6bo30j2ydwOlIOtXQxU%2Br0aiSjlOKA%3D%3D'; ///Service Key/
-    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); //
-    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); //
-    queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON'); //
-    queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent('20230609'); //
-    queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent('0500'); //
-    queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('55'); //
-    queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127'); /**/
-    xhr.open('GET', url + queryParams);
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-            json = JSON.parse(xml.responseText);
-            alert(json)
-        }
-    };
-    
-    xhr.send('');</script>
+
 <style>td {border:1px solid black;}</style>
 </head>
 <body>
-<h1>강아지 산책 지수</h1>
-<h2 id="message0">현재 온도는 ...이며, 미세먼지는 ...입니다.</h2>
-<form>개의 크기:<input type="radio" name='group1' value="dog1" autofocus/><label>대형견!</label><input type="radio" name='group1'value="dog2" autofocus/><label>중형견!</label><input type="radio" name='group1'value="dog3" autofocus/><label>소형견!</label><br /></form>
-<button id="button1">알아보기</button>
-<div id="message1">산책지수 : ...</div>
-<div id="message2">팁:</div>
+    <h1>강아지 산책 지수</h1>
+    <h2 id="message0">
+        현재 기온: 
+        <h4 id="tempNum"></h4>
+        ...이며, 미세먼지는 ...<h4 id="dustNum0"></h4>입니다.
+    </h2>
+    <div id="wind">
+        풍속: 
+        <h2 id="windNum"></h2>
+    </div>
+    <form>개의 크기:<input type="radio" name='group1' value="dog1" autofocus/><label>대형견!</label><input type="radio" name='group1'value="dog2" autofocus/><label>중형견!</label><input type="radio" name='group1'value="dog3" autofocus/><label>소형견!</label><br /></form>
+    <button id="button1">알아보기</button>
+    <div id="message1">산책지수 : ...</div>
+    TIP<div id="message2"></div>
+
+    
+
+    <script src="main.js"></script>
+    <script>
+        const button = document.getElementById("button1");
+        button.addEventListener('click', hello);
+    </script>
 </body>
 </html>
+

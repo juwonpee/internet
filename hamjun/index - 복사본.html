@@ -1,0 +1,145 @@
+<!-- <!Doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel = "stylesheet">
+<script>alert('log');
+    var dustQueryParams = new URLSearchParams({
+                    serviceKey: '33bU4NRUJ5pns3K/YK+U8LxMesOCiRs03brpKSY1mRMvXtN8NhftRxgU6bo30j2ydwOlIOtXQxU+r0aiSjlOKA==',
+                    returnType: 'JSON',
+                    numOfRows: '1',
+                    pageNo: '1',
+                    sidoName: '서울',
+                    ver: '1.0'
+                });
+                const dust_url = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
+                fetch(dust_url + '?' + dustQueryParams)
+                .then(function(response) {
+                    obj = response.json();
+                    console.log(obj);
+                    alert(obj);
+                    return obj;
+                })
+                .catch(function(error) {
+                    // console.log(response)
+                    console.log(error);
+                });alert('log2');
+
+
+//         function getLocation(tuple) {
+//   if (navigator.geolocation) { // GPS를 지원하면
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//         tuple[0] = position.coords.latitude;
+//         tuple[1] = position.coords.longitude;
+//         return tuple;
+//         alert(latitude+' '+longitude)
+//       alert(position.coords.latitude + ' ' + position.coords.longitude);
+//     }, function(error) {
+//       console.error(error);
+//     }, {
+//       enableHighAccuracy: false,
+//       maximumAge: 0,
+//       timeout: Infinity
+//     });
+//   } else {
+//     alert('GPS를 지원하지 않습니다');
+//   }
+// }var latitude = new Array(); var longitude;
+//     alert('ho');
+//     getLocation(latitude);
+
+    
+    //alert(latitude+' '+longitude);
+    // var xhr = new XMLHttpRequest();
+    // var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst'; ///URL/
+    // var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'33bU4NRUJ5pns3K%2FYK%2BU8LxMesOCiRs03brpKSY1mRMvXtN8NhftRxgU6bo30j2ydwOlIOtXQxU%2Br0aiSjlOKA%3D%3D'; ///Service Key/
+    // queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); //
+    // queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); //
+    // queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON'); //
+    // queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent('20230609'); //
+    // queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent('0500'); //
+    // queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('55'); //
+    // queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127'); /**/
+    // xhr.open('GET', url + queryParams);
+    // xhr.onreadystatechange = function () {
+    //     if (this.readyState == 4) {
+    //         alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+    //         json = JSON.parse(xml.responseText);
+    //         alert(json)
+    //     }
+    // };
+    
+    // xhr.send('');
+
+
+    </script>
+<style>td {border:1px solid black;}</style>
+</head>
+<body>
+<h1>강아지 산책 지수</h1>
+<h2 id="message0">현재 온도는 ...이며, 미세먼지는 ...입니다.</h2>
+<form>개의 크기:<input type="radio" name='group1' value="dog1" autofocus/><label>대형견!</label><input type="radio" name='group1'value="dog2" autofocus/><label>중형견!</label><input type="radio" name='group1'value="dog3" autofocus/><label>소형견!</label><br /></form>
+<button id="button1">알아보기</button>
+<div id="message1">산책지수 : ...</div>
+<div id="message2">팁:</div>
+</body>
+</html> -->
+<!Doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel = "stylesheet">
+
+<style>td {border:1px solid black;}</style>
+</head>
+<body>
+    <h1>강아지 산책 지수</h1>
+    <h2 id="message0">
+        현재 기온: 
+        <h4 id="tempNum"></h4>
+        ...이며, 미세먼지는 ...<h4 id="dustNum0"></h4>입니다.
+    </h2>
+    <form>개의 크기:<input type="radio" name='group1' value="dog1" autofocus/><label>대형견!</label><input type="radio" name='group1'value="dog2" autofocus/><label>중형견!</label><input type="radio" name='group1'value="dog3" autofocus/><label>소형견!</label><br /></form>
+    <button id="button1" onclick = printall(1,2)>알아보기</button>
+    <div id="message1">산책지수 : ...</div>
+    <div id="message2">팁:</div>
+
+    <div id="wind">
+        풍속: 
+        <h2 id="windNum"></h2>
+    </div>
+    <div id="dust">
+        미세먼지: 
+        <h2 id="dustNum"></h2>
+    </div>
+    <script>function printall(temp,wind){document.getElementById("tempNum").innerText=temp;document.getElementById("windNum").innerText=wind;
+        var nodevalue;
+        const genderNodeList
+        = document.getElementsByName('group1');
+        
+        genderNodeList.forEach((node) => {
+          if(node.checked)  {
+            document.getElementById('dustNum').innerText
+              = node.value;
+              nodevalue = node.value;
+          }
+        }) 
+
+        var result;
+        if(nodevalue="dog1"){if(temp>12){result="매우 좋음";}else if(temp>7){result="좋음";}else if(temp>-1){result="보통";}else if(temp>-4){result="나쁨";}else{result="매우 나쁨";}}
+        else if(nodevalue="dog2"){if(temp>10){result="매우 좋음";}else if(temp>7){result="좋음";}else if(temp>-1){result="보통";}else if(temp>-9){result="나쁨";}else{result="매우 나쁨";}}
+        else{if(temp>7){result="매우 좋음";}else if(temp>4){result="좋음";}else if(temp>-6){result="보통";}else if(temp>-9){result="나쁨";}else{result="매우 나쁨";}}
+        document.getElementById('message1').innerText
+              = 'result';
+        document.getElementById('message1').innerText
+              = '산책지수: '+result;
+}
+//printall(1,2);
+
+document.getElementById("button1").addEventListener('click',hello);
+function hello(){alert('hello'); printall(5,6);}
+
+</script>
+</body>
+</html>
+
