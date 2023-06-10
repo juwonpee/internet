@@ -2,7 +2,8 @@ body {
     margin: 0 auto;
     text-align:center;
     width: 500px;
-    background-image: url('job562-nunoon-04-e.jpg'); background-size: cover;
+    background-image: url('background.jpg'); 
+    background-size: cover;
 }
 
 .text {
